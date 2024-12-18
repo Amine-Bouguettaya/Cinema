@@ -1,0 +1,71 @@
+* {
+    font-family: 'Kanit';
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+
+}
+
+#button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 1em 1em;
+    font-size: medium;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    text-decoration: none;
+}
+
+.scrollTop {
+    color: white;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(circle, rgba(97,62,142,1) 30%, rgba(59,39,83,1) 100%);
+}
+
+#topNav {
+    display: flex;
+    flex-direction: row;
+}
+
+.nameContainer {
+    padding: 3vh 20vh;
+    display: flex;
+    flex-direction: row;
+}
+.fa-film {
+    font-size: xx-large;
+    padding-right: 0.5em;
+    margin: auto;
+}
+#navTitle {
+    font-weight: bold;
+    text-decoration: none;
+    font-size: xx-large;
+    color: white;
+}
+nav {
+    padding: 0em 10vh;
+    display: flex;
+    vertical-align: top;
+}
+.navLink {
+    margin: auto 4em;
+    text-decoration: none;
+    color: white;
+    font-size: large;
+}
+.linkGenre {
+    margin: auto 4em;
+    text-decoration: none;
+    color: black;
+    font-size: large;
+}
+#mainSection {
+    text-align: center;
+    align-items: center;
+}
