@@ -15,6 +15,8 @@ $temp = $requete->fetch();
     <br>
 <?php } ?>
 </div>
+<br>
+<a href="index.php?action=addCasting&id=<?= $temp["id_film"] ?>" name="addCasting" class="button">Ajouter un casting</a>
 
 <?php
 

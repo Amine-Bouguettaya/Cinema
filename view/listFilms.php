@@ -1,6 +1,7 @@
 <?php ob_start(); ?>
 
 <p class="uk-label uk-label-warning"> Il y a <?php $requete->rowCount() ?> films</p>
+<div style="display: flex; justify-content: center;">
 <table class="uk-table uk-table-striped">
     <thead>
         <tr>
@@ -18,6 +19,10 @@
         <?php } ?>
     </tbody>
 </table>
+</div>
+<br>
+<br>
+<a href="index.php?action=addFilm" name="addFilm" class="button">Ajouter un films</a>
 
 <?php
 
