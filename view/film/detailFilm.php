@@ -16,7 +16,11 @@ $temp = $requete->fetch();
 <?php } ?>
 </div>
 <br>
-<a href="index.php?action=addCasting&id=<?= $temp["id_film"] ?>" name="addCasting" class="button">Ajouter un casting</a>
+<div>
+    <a href="index.php?action=addCasting&id=<?= $temp["id_film"] ?>" name="addCasting" class="button">Ajouter un casting</a>
+    <a href="index.php?action=updateFilm&id=<?= $temp["id_film"] ?>" class="button">Modifier Film</a>
+    <a href="index.php?action=deleteFilm&id=<?= $temp["id_film"] ?>" class="button">Supprimer Film</a>
+</div>
 
 <?php
 

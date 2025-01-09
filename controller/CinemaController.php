@@ -25,6 +25,82 @@ class CinemaController {
 
         require "view/film/detailFilm.php";
     }
+    public function updateFilm($id) {
+        $pdo = Connect::seConnecter();
+
+        $requete3 = $pdo->prepare("SELECT id_film, f.titre, f.annee_sortie, f.duree, f.resumer, f.note, f.id_realisateur FROM film f WHERE f.id_film = :id");
+        $requete3->execute(["id" => $id]);
+
+        $requete = $pdo->query("SELECT r.id_realisateur, CONCAT(p.nom, ' ', p.prenom) AS identite FROM realisateur r INNER JOIN personne p ON r.id_personne = p.id_personne");
+        $requete2 = $pdo->query("SELECT g.id_genre, nom_genre FROM genre g");
+
+        $requete4 = $pdo->prepare("SELECT gf.id_genre FROM film f INNER JOIN genre_film gf ON f.id_film = gf.id_film WHERE f.id_film = :id");
+        $requete4->execute(["id" => $id]);
+
+        require "view/film/updateFilm.php";
+    }
+    public function updateFilmTraitement($id) {
+        if(isset($_POST["submit"])) {
+
+            $titre = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_SPECIAL_CHARS);
+            $annee = filter_input(INPUT_POST, "annee", FILTER_VALIDATE_INT);
+            $duree = filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
+            $resumer = filter_input(INPUT_POST, "resumer", FILTER_SANITIZE_SPECIAL_CHARS);
+            $note = filter_input(INPUT_POST, "note", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $realisateur = filter_input(INPUT_POST, "realisateur", FILTER_VALIDATE_INT);
+
+            if ($titre && $annee && $duree && $resumer && $note && $realisateur) {
+                    
+                $pdo = Connect::seConnecter();
+
+                $requete = $pdo->prepare("UPDATE film SET titre = :titre, annee_sortie = :annee, duree = :duree, resumer = :resumer, note = :note, id_realisateur = :realisateur WHERE id_film = :id");
+                $requete->execute(["titre" => $titre, "annee" => $annee, "duree" => $duree, "resumer" => $resumer, "note" => $note, "realisateur" => $realisateur, "id" => $id]);
+            }
+        }
+
+        $requete3 = $pdo->prepare("DELETE FROM genre_film WHERE id_film = :id");
+        $requete3->execute(["id" => $id]);
+
+        if (isset($_POST["listGenres"])) {
+            $listGenres = $_POST["listGenres"];
+            foreach ($listGenres as $genre) {
+                $requete2 = $pdo->prepare("INSERT INTO genre_film (id_film, id_genre) VALUE (:id_film, :id_genre)");
+                $requete2->execute(["id_film" => $id, "id_genre" => $genre]);
+            }
+        }
+        header("location:index.php?action=detailFilm&id=".$id);
+    }
+
+    public function deleteFilm($id) {
+
+        $pdo = Connect::seConnecter();
+
+        $requete = $pdo->prepare("SELECT id_film, titre FROM film WHERE id_film = :id");
+        $requete->execute(["id" => $id]);
+        require "view/film/deleteFilm.php";
+    }
+    public function deleteFilmTraitement($id) {
+        $pdo = Connect::seConnecter();
+
+        $requete4 = $pdo->prepare("SELECT image_film FROM Film WHERE id_film = :id");
+        $requete4->execute(["id" => $id]);
+
+        $temp = $requete4->fetch();
+        if (file_exists($temp["image_film"])) {
+            unlink($temp["image_film"]);
+        }
+
+        $requete = $pdo->prepare("DELETE FROM casting WHERE id_film = :id");
+        $requete->execute(["id" => $id]);
+
+        $requete2 = $pdo->prepare("DELETE FROM genre_film WHERE id_film = :id");
+        $requete2->execute(["id" => $id]);
+
+        $requete3 = $pdo->prepare("DELETE FROM film WHERE id_film = :id");
+        $requete3->execute(["id" => $id]);
+
+        header("location:index.php?action=listFilms");
+    }
     public function addFilm() {
 
         $pdo = Connect::seConnecter();
@@ -157,7 +233,7 @@ class CinemaController {
             $realisateur = filter_input(INPUT_POST, "realisateur", FILTER_VALIDATE_INT);
 
             if (isset($_FILES["fileToUpload"])) {
-                $target_directory = "image/";
+                $target_directory = "public/img/";
                 $target_file = $target_directory.basename($_FILES["fileToUpload"]["name"]);
                 $isUploadOk = 1;
                 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -200,7 +276,7 @@ class CinemaController {
                 
                 $pdo = Connect::seConnecter();
 
-                $requete = $pdo->prepare("INSERT INTO film (titre, annee_sortie, duree, resume, note, id_realisateur, image_film) VALUE (:titre , :annee , :duree , :resumer ,:note ,:realisateur, :image_film)");
+                $requete = $pdo->prepare("INSERT INTO film (titre, annee_sortie, duree, resumer, note, id_realisateur, image_film) VALUE (:titre , :annee , :duree , :resumer ,:note ,:realisateur, :image_film)");
                 $requete->execute(["titre" => $titre, "annee" => $annee, "duree" => $duree, "resumer" => $resumer, "note" => $note, "realisateur" => $realisateur, "image_film" => $target_file]);
             }
         }
@@ -212,8 +288,7 @@ class CinemaController {
                 $requete2->execute(["id_film" => $temp, "id_genre" => $genre]);
             }
         }
-        require "view/traitement.php";
-        // header("location:index.php?action=addFilm");
+        header("location:index.php?action=listFilms");
     }
 
     public function listGenre() {
@@ -235,5 +310,13 @@ class CinemaController {
             }
         }
         header('location:index.php?action=listGenre');
+    }
+
+    public function detailGenre($id) {
+        $pdo = Connect::seConnecter();
+
+        $requete = $pdo->prepare("SELECT f.id_film, f.titre, f.annee_sortie FROM genre g INNER JOIN genre_film gf ON g.id_genre = gf.id_genre INNER JOIN film f ON gf.id_film = f.id_film WHERE g.id_genre = :idgenre");
+        $requete->execute(["idgenre" => $id]);
+        require "view/detailGenre.php";
     }
 }

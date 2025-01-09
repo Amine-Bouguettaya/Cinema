@@ -16,6 +16,7 @@
 
     <span>genre:</span>
     <br>
+    <br>
     <?php
         foreach($requete2->fetchAll() as $genre) { ?>
             <input type="checkbox" name="listGenres[]" value="<?= $genre["id_genre"] ?>">

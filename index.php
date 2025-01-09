@@ -17,13 +17,24 @@ if (isset($_GET["action"])) {
     switch ($_GET["action"]) {
         case "listFilms":
             $ctrlCinema->listFilms();
-            // $ctrlHome->home();
             break;
         case "detailFilm":
             $ctrlCinema->detailFilm($_GET["id"]);
             break;
         case "addFilm":
             $ctrlCinema->addFilm();
+            break;
+        case "updateFilm":
+            $ctrlCinema->updateFilm($_GET["id"]);
+            break;
+        case "updateFilmTraitement":
+            $ctrlCinema->updateFilmTraitement($_GET["id"]);
+            break;
+        case "deleteFilm":
+            $ctrlCinema->deleteFilm($_GET["id"]);
+            break;
+        case "deleteFilmTraitement":
+            $ctrlCinema->deleteFilmTraitement($_GET["id"]);
             break;
         case "addFilmTraitement":
             $ctrlCinema->addFilmTraitement();
@@ -52,11 +63,13 @@ if (isset($_GET["action"])) {
         case "detailActeur":
             $ctrlPersonne->detailActeur($_GET["id"]);
             break;
+        case "detailGenre":
+            $ctrlCinema->detailGenre($_GET["id"]);
+            break;
     }
 }
 else {
     $ctrlHome->home();
-    // $ctrlCinema->listFilms();
 }
 
 // ajouter un film
