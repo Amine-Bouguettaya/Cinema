@@ -33,11 +33,62 @@ $contenu = ob_get_clean();
         <div class="hero-icon">🎬</div>
         <h1>Votre répertoire de film et documentaire</h1>
     </section>
-    <section id="mainSection">
-        <h1>Template</h1>
-        <h1> <?= $titre_secondaire ?> </h1>
-        <?= $contenu ?>
+    <section class="movie-section">
+        <h2 class="section-title">Sortie de la Semaine</h2>
+        <div class="movie-grid">
+            <div class="movie-card">
+                <img src="/placeholder.svg?height=350&width=250" alt="Jamais sans mon psy">
+                <div class="movie-info">
+                    <div class="movie-title">Jamais sans mon psy</div>
+                    <div class="movie-director">De Arnaud Lemort</div>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="/placeholder.svg?height=350&width=250" alt="Le Seigneur des Anneaux">
+                <div class="movie-info">
+                    <div class="movie-title">Le Seigneur des Anneaux</div>
+                    <div class="movie-director">De Peter Jackson</div>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="/placeholder.svg?height=350&width=250" alt="Saint-Ex">
+                <div class="movie-info">
+                    <div class="movie-title">Saint-Ex</div>
+                    <div class="movie-director">De Pablo Agüero</div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="see-more">Voir plus de film</a>
     </section>
+
+    <section class="movie-section">
+        <h2 class="section-title">Toujours à l'affiche</h2>
+        <div class="movie-grid">
+            <div class="movie-card">
+                <img src="/placeholder.svg?height=350&width=250" alt="En Fanfare">
+                <div class="movie-info">
+                    <div class="movie-title">En Fanfare</div>
+                    <div class="movie-director">De Emmanuel Courcol</div>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="/placeholder.svg?height=350&width=250" alt="Vaiana 2">
+                <div class="movie-info">
+                    <div class="movie-title">Vaiana 2</div>
+                    <div class="movie-director">De David G. Derrick Jr.</div>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="/placeholder.svg?height=350&width=250" alt="Gladiator 2">
+                <div class="movie-info">
+                    <div class="movie-title">Gladiator 2</div>
+                    <div class="movie-director">De Ridley Scott</div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="see-more">Voir plus de film</a>
+    </section>
+
     <footer>
         <div class="footerContainer">
             <div class="socialsContainer">
