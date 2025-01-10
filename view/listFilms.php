@@ -16,7 +16,7 @@ $temp = $requete->fetchall();
                 </div>
             </div>
             <?php } ?>
-    </div>
+        </div>
     </div>
 
 <?php

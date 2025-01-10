@@ -233,7 +233,7 @@ class CinemaController {
             $realisateur = filter_input(INPUT_POST, "realisateur", FILTER_VALIDATE_INT);
 
             if (isset($_FILES["fileToUpload"])) {
-                $target_directory = "public/img/";
+                $target_directory = "public/image/film/";
                 $target_file = $target_directory.basename($_FILES["fileToUpload"]["name"]);
                 $isUploadOk = 1;
                 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
