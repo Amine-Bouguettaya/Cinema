@@ -27,6 +27,7 @@ $contenu = ob_get_clean();
                 <a href="index.php?action=listActeurs" name="listActeurs" class="navLink">Acteurs</a>
                 <a href="index.php?action=listRealisateur" name="listRealisateur" class="navLink">Réalisateurs</a>
                 <a href="index.php?action=listGenre" name="listGenre" class="navLink">Genres</a>
+                <a href="index.php?action=addFilm" name="addFilm" class="navLink">Ajouter un Film</a>
         </nav>
     </header>
     <section class="hero">
@@ -36,57 +37,37 @@ $contenu = ob_get_clean();
     <section class="movie-section">
         <h2 class="section-title">Sortie de la Semaine</h2>
         <div class="movie-grid">
+            <?php foreach($requete->fetchall() as $film) {?>
             <div class="movie-card">
-                <img src="/placeholder.svg?height=350&width=250" alt="Jamais sans mon psy">
+                <img src="<?php if ($film["image_film"]) {echo $film["image_film"] ;} else {
+                    echo "public/image/placeholder.svg?height=350&width=250";
+                } ?>" alt="Jamais sans mon psy">
                 <div class="movie-info">
-                    <div class="movie-title">Jamais sans mon psy</div>
-                    <div class="movie-director">De Arnaud Lemort</div>
+                    <div class="movie-title"><?=$film["titre"] ?></div>
+                    <div class="movie-director">de <?=$film["indentite"]?></div>
                 </div>
             </div>
-            <div class="movie-card">
-                <img src="/placeholder.svg?height=350&width=250" alt="Le Seigneur des Anneaux">
-                <div class="movie-info">
-                    <div class="movie-title">Le Seigneur des Anneaux</div>
-                    <div class="movie-director">De Peter Jackson</div>
-                </div>
-            </div>
-            <div class="movie-card">
-                <img src="/placeholder.svg?height=350&width=250" alt="Saint-Ex">
-                <div class="movie-info">
-                    <div class="movie-title">Saint-Ex</div>
-                    <div class="movie-director">De Pablo Agüero</div>
-                </div>
-            </div>
+            <?php } ?>
         </div>
-        <a href="#" class="see-more">Voir plus de film</a>
+        <a href="index.php?action=listFilms" class="see-more">Voir plus de film</a>
     </section>
 
     <section class="movie-section">
         <h2 class="section-title">Toujours à l'affiche</h2>
         <div class="movie-grid">
+        <?php foreach($requete2->fetchall() as $film) {?>
             <div class="movie-card">
-                <img src="/placeholder.svg?height=350&width=250" alt="En Fanfare">
+                <img src="<?php if ($film["image_film"]) {echo $film["image_film"] ;} else {
+                    echo "public/image/placeholder.svg?height=350&width=250";
+                } ?>" alt="Jamais sans mon psy">
                 <div class="movie-info">
-                    <div class="movie-title">En Fanfare</div>
-                    <div class="movie-director">De Emmanuel Courcol</div>
+                    <div class="movie-title"><?=$film["titre"] ?></div>
+                    <div class="movie-director">de <?=$film["indentite"]?></div>
                 </div>
             </div>
-            <div class="movie-card">
-                <img src="/placeholder.svg?height=350&width=250" alt="Vaiana 2">
-                <div class="movie-info">
-                    <div class="movie-title">Vaiana 2</div>
-                    <div class="movie-director">De David G. Derrick Jr.</div>
-                </div>
-            </div>
-            <div class="movie-card">
-                <img src="/placeholder.svg?height=350&width=250" alt="Gladiator 2">
-                <div class="movie-info">
-                    <div class="movie-title">Gladiator 2</div>
-                    <div class="movie-director">De Ridley Scott</div>
-                </div>
-            </div>
+            <?php } ?>
         </div>
-        <a href="#" class="see-more">Voir plus de film</a>
+        <a href="index.php?action=listFilms" class="see-more">Voir plus de film</a>
     </section>
 
     <footer>

@@ -19,10 +19,11 @@
                 <a href="index.php?action=listActeurs" name="listActeurs" class="navLink">Acteurs</a>
                 <a href="index.php?action=listRealisateur" name="listRealisateur" class="navLink">Réalisateurs</a>
                 <a href="index.php?action=listGenre" name="listGenre" class="navLink">Genres</a>
+                <a href="index.php?action=addFilm" name="addFilm" class="navLink">Ajouter un Film</a>
         </nav>
     </header>
     <section id="mainSection">
-        <h1>Template</h1>
+        <br>
         <h1> <?= $titre_secondaire ?> </h1>
         <?= $contenu ?>
     </section>

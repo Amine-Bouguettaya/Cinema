@@ -1,28 +1,23 @@
-<?php ob_start(); ?>
+<?php ob_start();
+$temp = $requete->fetchall();
+?>
 
-<p class="uk-label uk-label-warning"> Il y a <?php $requete->rowCount() ?> films</p>
-<div style="display: flex; justify-content: center;">
-<table class="uk-table uk-table-striped">
-    <thead>
-        <tr>
-            <th>TITRE</th>
-            <th>ANNEE SORTIE</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        foreach($requete->fetchAll() as $film) { ?>
-        <tr>
-            <td><a href="index.php?action=detailFilm&id=<?= $film["id_film"] ?>"><?= $film["titre"] ?></a></td>
-            <td><a href="index.php?action=detailFilm&id=<?= $film["id_film"] ?>"><?= $film["annee_sortie"] ?></a></td>
-        </tr>
-        <?php } ?>
-    </tbody>
-</table>
-</div>
-<br>
-<br>
-<a href="index.php?action=addFilm" name="addFilm" class="button">Ajouter un films</a>
+<p class="uk-label uk-label-warning"> Il y a <?= count($temp) ?> films</p>
+<div class="movie-section">
+    <div class="movie-grid">
+        <?php foreach($temp as $film) {?>
+            <div class="movie-card">
+                <img src="<?php if ($film["image_film"]) {echo $film["image_film"] ;} else {
+                    echo "public/image/placeholder.svg?height=350&width=250";
+                } ?>" alt="Jamais sans mon psy">
+                <div class="movie-info">
+                    <a href="index.php?action=detailFilm&id=<?=$film["id_film"]?>" class="movie-title"><?=$film["titre"] ?></a>
+                    <a href="index.php?action=detailFilm&id=<?=$film["id_realisateur"]?>" class="movie-director">de <?=$film["indentite"]?></a>
+                </div>
+            </div>
+            <?php } ?>
+    </div>
+    </div>
 
 <?php
 

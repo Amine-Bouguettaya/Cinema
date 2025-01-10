@@ -175,12 +175,13 @@ nav {
 
 .movie-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 2rem;
     margin-bottom: 2rem;
 }
 
 .movie-card {
+    width: 100%;
     background: white;
     border-radius: 8px;
     overflow: hidden;
@@ -194,16 +195,21 @@ nav {
 }
 
 .movie-info {
+    display: flex;
+    flex-direction: column;
     padding: 1rem;
     text-align: center;
 }
 
 .movie-title {
+    color: black;
+    text-decoration: none;
     font-weight: bold;
     margin-bottom: 0.5rem;
 }
 
 .movie-director {
+    text-decoration: none;
     color: #666;
     font-size: 0.9rem;
 }

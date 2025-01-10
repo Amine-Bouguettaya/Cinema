@@ -9,7 +9,7 @@ class CinemaController {
 
     public function listFilms() {
         $pdo = Connect::seConnecter();
-        $requete = $pdo->query("SELECT id_film, titre, annee_sortie FROM film");
+        $requete = $pdo->query("SELECT id_film, titre, annee_sortie, image_film, CONCAT(nom,' ',prenom) AS indentite, f.id_realisateur FROM film f INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur INNER JOIN personne p ON r.id_personne = p.id_personne");
         require "./view/listFilms.php";
     }
 
@@ -254,8 +254,8 @@ class CinemaController {
                     echo "Sorry, your file is too large.";
                     $IsUploadOk = 0;
                 }
-                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
-                    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "webp" ) {
+                    echo "Sorry, only JPG, JPEG, PNG & webp files are allowed.";
                     $IsUploadOk = 0;
                 }
                 if ($isUploadOk == 0) {
