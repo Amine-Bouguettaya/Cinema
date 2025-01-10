@@ -232,8 +232,9 @@ footer {
     flex-direction: column;
     text-align: center;
     background-color: var(--primary);
-    min-height: 40vh;
+    min-height: 30vh;
 }
+
 .footerContainer {
     margin: auto;
 }
