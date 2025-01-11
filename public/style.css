@@ -51,6 +51,7 @@ body {
 }
 
 .nav-menu {
+    padding: 0em 5vh;
     display: flex;
     gap: 2rem;
 }
@@ -139,7 +140,7 @@ body {
     color: white;
 }
 nav {
-    padding: 0em 10vh;
+    padding: 0em 5vh;
     display: flex;
     vertical-align: top;
 }

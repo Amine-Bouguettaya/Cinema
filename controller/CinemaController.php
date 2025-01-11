@@ -294,7 +294,7 @@ class CinemaController {
     public function listGenre() {
         $pdo = Connect::seConnecter();
 
-        $requete = $pdo->query("SELECT g.id_genre, g.nom_genre FROM genre g");
+        $requete = $pdo->query("SELECT g.id_genre, g.nom_genre, g.image_genre FROM genre g");
         require "view/listGenre.php";
     }
     
