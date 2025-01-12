@@ -43,8 +43,8 @@ $contenu = ob_get_clean();
                     echo "public/image/placeholder.svg?height=350&width=250";
                 } ?>" alt="Jamais sans mon psy">
                 <div class="movie-info">
-                    <div class="movie-title"><?=$film["titre"] ?></div>
-                    <div class="movie-director">de <?=$film["indentite"]?></div>
+                <a href="index.php?action=detailFilm&id=<?=$film["id_film"]?>" class="movie-title"><?=$film["titre"] ?></a>
+                <a href="index.php?action=detailFilm&id=<?=$film["id_realisateur"]?>" class="movie-director">de <?=$film["indentite"]?></a>
                 </div>
             </div>
             <?php } ?>
@@ -61,8 +61,8 @@ $contenu = ob_get_clean();
                     echo "public/image/placeholder.svg?height=350&width=250";
                 } ?>" alt="Jamais sans mon psy">
                 <div class="movie-info">
-                    <div class="movie-title"><?=$film["titre"] ?></div>
-                    <div class="movie-director">de <?=$film["indentite"]?></div>
+                <a href="index.php?action=detailFilm&id=<?=$film["id_film"]?>" class="movie-title"><?=$film["titre"] ?></a>
+                <a href="index.php?action=detailFilm&id=<?=$film["id_realisateur"]?>" class="movie-director">de <?=$film["indentite"]?></a>
                 </div>
             </div>
             <?php } ?>

@@ -17,7 +17,7 @@ class CinemaController {
 
         $pdo = Connect::seConnecter();
 
-        $requete = $pdo->prepare("SELECT id_film, f.titre, f.annee_sortie, SUBSTRING(SEC_TO_TIME(f.duree * 60), 1, 5) AS duree, CONCAT(p.nom, ' ', p.prenom) AS realisateur, f.id_realisateur FROM film f INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur INNER JOIN personne p ON r.id_personne = p.id_personne WHERE f.id_film = :id");
+        $requete = $pdo->prepare("SELECT id_film, f.titre, f.annee_sortie, f.resumer, f.image_film, SUBSTRING(SEC_TO_TIME(f.duree * 60), 1, 5) AS duree, CONCAT(p.nom, ' ', p.prenom) AS realisateur, f.id_realisateur FROM film f INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur INNER JOIN personne p ON r.id_personne = p.id_personne WHERE f.id_film = :id");
         $requete->execute(["id" => $id]);
 
         $requete2 = $pdo->prepare("SELECT CONCAT(p.nom, ' ', p.prenom) AS nomprenom , p.prenom, p.sexe, c.id_acteur FROM film f INNER JOIN casting c ON f.id_film = c.id_film INNER JOIN acteur a ON c.id_acteur = a.id_acteur INNER JOIN personne p ON a.id_personne = p.id_personne WHERE f.id_film = :id");
@@ -315,7 +315,7 @@ class CinemaController {
     public function detailGenre($id) {
         $pdo = Connect::seConnecter();
 
-        $requete = $pdo->prepare("SELECT f.id_film, f.titre, f.annee_sortie FROM genre g INNER JOIN genre_film gf ON g.id_genre = gf.id_genre INNER JOIN film f ON gf.id_film = f.id_film WHERE g.id_genre = :idgenre");
+        $requete = $pdo->prepare("SELECT f.id_film, f.titre, f.image_film, CONCAT(nom,' ',prenom) AS indentite, f.id_realisateur, g.nom_genre FROM genre g INNER JOIN genre_film gf ON g.id_genre = gf.id_genre INNER JOIN film f ON gf.id_film = f.id_film INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur INNER JOIN personne p ON r.id_personne = p.id_personne WHERE g.id_genre = :idgenre");
         $requete->execute(["idgenre" => $id]);
         require "view/detailGenre.php";
     }
